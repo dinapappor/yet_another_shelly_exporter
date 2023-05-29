@@ -16,69 +16,6 @@ type shellyCollector struct {
 	MeterStatus *prometheus.Desc
 }
 
-type Device struct {
-	Id          string
-	Name        string
-	Image       string
-	Category    string
-	Type        string
-	Room_Id     int
-	Channel     int
-	Gen         int
-	Ip          string
-	Relay_usage string
-}
-
-type DeviceStatusRelay struct {
-	Ison            bool
-	Has_timer       bool
-	Timer_started   int
-	Timer_duration  int
-	Timer_remaining int
-	Source          string
-}
-
-type DeviceStatusMeter struct {
-	Power    int
-	Is_valid bool
-}
-
-type DeviceStatus struct {
-	Temperature     float32
-	Overtemperature bool
-	Uptime          int
-	Relays          []DeviceStatusRelay `json:"relays"`
-	Meters          []DeviceStatusMeter `json:"meters"`
-}
-
-type DeviceStatusResultData struct {
-	Devices map[string]DeviceStatus `json:"devices_status"`
-}
-
-type DeviceStatusResult struct {
-	IsOK bool                   `json:"isok"`
-	Data DeviceStatusResultData `json:"data"`
-}
-
-type Room struct {
-	Id             int
-	Image          string
-	Modified       int
-	Name           string
-	Overview_style bool
-	Position       int
-}
-
-type ResultData struct {
-	Devices map[string]Device `json:"devices"`
-	Rooms   map[string]Room   `json:"rooms"`
-}
-
-type Result struct {
-	IsOK bool       `json:"isok"`
-	Data ResultData `json:"data"`
-}
-
 func newShellyCollector() *shellyCollector {
 	// we need one for each different type of
 	// metric in the shellyCollector struct
